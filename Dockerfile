@@ -33,7 +33,6 @@ ADD setup_postgres.sh /tmp/
 RUN /etc/init.d/postgresql start &&\
     su postgres -c "/tmp/setup_postgres.sh"
 
-
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible. 
 RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
@@ -42,7 +41,7 @@ RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.co
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 
 # Run the rest of the commands as the ``postgres`` user created by the ``postgres-9.3`` package when it was ``apt-get installed``
-USER postgres
+# USER postgres
 
 # Expose the PostgreSQL port
 EXPOSE 5432
