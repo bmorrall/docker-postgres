@@ -34,8 +34,8 @@ RUN chown postgres:postgres -R /etc/postgresql /var/log/postgresql /var/lib/post
 # then create a database `docker` owned by the ``docker`` role.
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
-# RUN /etc/init.d/postgresql start &&\
-#     su postgres -c "/tmp/setup_postgres.sh"
+RUN /etc/init.d/postgresql start &&\
+    su postgres -c "/tmp/setup_postgres.sh"
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible. 
