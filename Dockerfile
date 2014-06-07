@@ -28,6 +28,7 @@ RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contri
 ADD setup_postgres.sh /tmp/
 ADD start_postgres.sh /tmp/
 
+RUN chown postgres:postgres -R /etc/postgresql /var/log/postgresql /var/lib/postgresql
 
 # Create a PostgreSQL role named ``docker`` with ``docker`` as the password and
 # then create a database `docker` owned by the ``docker`` role.
