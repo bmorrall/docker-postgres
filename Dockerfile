@@ -25,11 +25,14 @@ RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contri
 # Note: The official Debian and Ubuntu images automatically ``apt-get clean``
 # after each ``apt-get``
 
+ADD setup_postgres.sh /tmp/
+ADD start_postgres.sh /tmp/
+
+
 # Create a PostgreSQL role named ``docker`` with ``docker`` as the password and
 # then create a database `docker` owned by the ``docker`` role.
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
-ADD setup_postgres.sh /tmp/
 RUN /etc/init.d/postgresql start &&\
     su postgres -c "/tmp/setup_postgres.sh"
 
@@ -50,4 +53,4 @@ EXPOSE 5432
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
 # Set the default command to run when starting the container
-CMD ["su", "postgres", "-c", "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"]
+CMD ["su", "postgres", "-c", "/tmp/start_postgres.sh"]
