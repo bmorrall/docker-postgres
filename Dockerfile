@@ -31,7 +31,7 @@ RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contri
 #       allows the RUN command to span multiple lines.
 ADD setup_postgres.sh /tmp
 RUN /etc/init.d/postgresql start &&\
-    su -c postgres "/tmp/setup_postgres.sh"
+    su postgres -c "/tmp/setup_postgres.sh"
 
 
 # Adjust PostgreSQL configuration so that remote connections to the
