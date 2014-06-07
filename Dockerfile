@@ -29,7 +29,7 @@ RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contri
 # then create a database `docker` owned by the ``docker`` role.
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
-ADD setup_postgres.sh /tmp
+ADD setup_postgres.sh /tmp/
 RUN /etc/init.d/postgresql start &&\
     su postgres -c "/tmp/setup_postgres.sh"
 
